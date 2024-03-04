@@ -111,4 +111,4 @@ From the installation files, download and install HeidiSQL. Create a new session
 
 <h2>osTicket Installed!</h2>
 
-osTicket is now installed and ready to be used. I used osTicket to understand how ticketing systems work and how to resolve tickets. I understand that working in a help desk or desktop support position I will be working to clear tickets while in a variety of situations. Running simulations of a ticketing system and implementing the system itself in a lab environment gave me experience on multiple sides of the program as the administrator and a user of the system.
+Now, osTicket is now installed and ready to be used. I used osTicket to understand how ticketing systems work and how to resolve tickets. I understand that working in a help desk or desktop support position I will be working to clear tickets while in a variety of situations. Running simulations of a ticketing system and implementing the system itself in a lab environment gave me experience on multiple sides of the program as the administrator and a user of the system.
