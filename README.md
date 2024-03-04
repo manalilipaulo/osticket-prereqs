@@ -3,30 +3,19 @@
 </p>
 
 <h1>osTicket - Prerequisites and Installation</h1>
-This tutorial outlines the prerequisites and installation of the open-source help desk ticketing system osTicket.<br />
+For this lab, I share how to get started with using and installing osTicket with files that are referenced <a href="https://drive.google.com/drive/u/2/folders/1APMfNyfNzcxZC6EzdaNfdZsUwxWYChf6">here</a>. I completed this lab using a Windows 10 Pro Virtual Machine created through Microsoft Azure.<br />
 
 
-<h2>Video Demonstration</h2>
-
-- ### [YouTube: How To Install osTicket with Prerequisites](https://www.youtube.com)
 
 <h2>Environments and Technologies Used</h2>
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
 - Internet Information Services (IIS)
-
+- MySQL
 <h2>Operating Systems Used</h2>
 
 - Windows 10 (21H2)
-
-<h2>List of Prerequisites</h2>
-
-- Also 1
-- Also 2
-- Also 3
-- Also 4
-- Also 5
 
 <h2>Installation Steps</h2>
 
@@ -34,7 +23,10 @@ This tutorial outlines the prerequisites and installation of the open-source hel
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-It is important to take care of the patient, to be followed by the patient, but it will happen at such a time that there is a lot of work and pain. For to come to the smallest detail, no one should practice any kind of work unless he derives some benefit from it. Do not be angry with the pain in the reprimand in the pleasure he wants to be a hair from the pain in the hope that there is no breeding.
+Prior to getting started, the Internet Information Services must be enabled. To use osTicket locally, it requires IIS to properly function.
+  That can be done by: 
+ <p> Opening the Control Panel > Open Programs > Turn Windows Features On or Off</p>
+ <p>From this menu, you select Internet Information Services > Web Management Tools > enable IIS Management Console you can then click through World Wide Web Services > Application Development Features > enable CGI and click ok to confirm.</p>
 </p>
 <br />
 
@@ -42,7 +34,7 @@ It is important to take care of the patient, to be followed by the patient, but 
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-It is important to take care of the patient, to be followed by the patient, but it will happen at such a time that there is a lot of work and pain. For to come to the smallest detail, no one should practice any kind of work unless he derives some benefit from it. Do not be angry with the pain in the reprimand in the pleasure he wants to be a hair from the pain in the hope that there is no breeding.
+After enabling IIS, you can download and install PHP Manager for IIS (PHPManagerforIIS_V1.5.0.msi) from the provided installation files folder. Download and install the Rewrite Module (rewrite_amd64_en-US.msi) after installing PHP Manager for IIS.
 </p>
 <br />
 
@@ -50,6 +42,73 @@ It is important to take care of the patient, to be followed by the patient, but 
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-It is important to take care of the patient, to be followed by the patient, but it will happen at such a time that there is a lot of work and pain. For to come to the smallest detail, no one should practice any kind of work unless he derives some benefit from it. Do not be angry with the pain in the reprimand in the pleasure he wants to be a hair from the pain in the hope that there is no breeding.
+After installing the Rewrite Module, create a new folder/directory called C:\PHP on the Windows (C:) drive. This new folder will be used to unzip the contents from the PHP 7.3.8 (php-7.3.8-nts-Win32-VC15-x86.zip) zip folder downloaded from the installation files. Extract all contents from the zip folder into the C:\PHP folder.
 </p>
 <br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Following the previous step, download and install VC_redist.x86.exe from the installation files folder.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Then, download and install MySQL 5.5.62 (mysql-5.5.62-win32.msi) from the installation files. Inside the MySQL setup wizard, select "I agree" > Typical install > Install > Launch the Configuration Wizard after the installation. Select Standard Configuration > Install As Windows Service > ensure the "Launch the MySQL Server automatically" is checked. 
+
+<p>For credentials, the username will be root and the password is Password1. In a practical setting, the credentials will be basic to where they can be easily guessed. For the purposes of this lab, the standard credentials root and Password1 will do.</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Before installing osTicket, configurations need to be made within IIS. </p>
+<p>So Open IIS as an admin > select PHP Manager. Within PHP Manager > Register new PHP version > Browse and select the PHP CGI executable file (php-cgi.exe) within the PHP folder created earlier in the lab. After registering the PHP version, reload the IIS server within the management console.</p>
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+From the installation files, download osTicket v1.15.8. Extract and copy the "upload" folder to the following path: c:\inetpub\wwwroot. Within the c:\inetpub\wwwroot folder, rename "upload" to "osTicket." Reload the IIS server afterward.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Within the IIS console, select Sites > Default > osTicket. Click "Browse *:80" and the installation page for osTicket will now show up. Some extensions are not enabled and they will be enabled with the IIS console before installing osTicket. To do so, click on PHP Manager while in the osTicket menu in IIS. Click on "Enable or disable an extension." Enable the following extensions: php_imap.dll, php_intl.dll, php_opcache.dll.
+
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Before continuing to install osTicket, a file needs to be renamed and its permissions need to be changed. From C:\inetpub\wwwroot\osTicket\include, rename ost-sampleconfig.php to ost-config.php. The newly named ost-config.php will have its permissions changed. Open its Properties and change the following permissions: Disable inheritance> Remove All and New Permissions -> Everyone -> All.
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+From the installation files, download and install HeidiSQL. Create a new session with HeidiSQL and enter the password used in the installation of MySQL earlier. Within the new session, right-click on Unnamed and create a new database named osTicket.
+</p>
+<br />
+
+<p>Within osTicket browser window, enter the necessary details to set up osTicket. For the MySQL database, use the credentials used for MySQL and HeidiSQL.</p>
+
+<p>After everything is done, osTicket should now be installed! Before continuing to use osTicket, some clean up has to be done. First, delete the setup folder found in C:\inetpub\wwwroot\osTicket. Next, return to C:\inetpub\wwwroot\osTicket\include and change the permissions of the ost-config.php file. The file should no longer have full access to Everyone. Revert the permissions to "Read" only.</p>
+
+<h2>osTicket Installed!</h2>
+
+osTicket is now installed and ready to be used. I used osTicket to understand how ticketing systems work and how to resolve tickets. I understand that working in a help desk or desktop support position I will be working to clear tickets while in a variety of situations. Running simulations of a ticketing system and implementing the system itself in a lab environment gave me experience on multiple sides of the program as the administrator and a user of the system.
